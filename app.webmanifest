@@ -5,8 +5,13 @@
         {
             "src": "/assets/favicon/handios-favicon.png",
             "type": "image/png",
-            "sizes": "500x500",
+            "sizes": "512x512",
             "purpose": "maskable"
+        },
+        {
+            "src": "/assets/favicon/handios-favicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ],
     "id": "/?source=pwa",
