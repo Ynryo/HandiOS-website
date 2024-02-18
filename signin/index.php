@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/inputs.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/buttons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -22,6 +23,36 @@
         <h1>Inscription</h1>
         <h2>Saisissez vos informations pour utiliser Handi'OS</h2>
         <form action="/signin/" method="post">
+            <div class="account-type">
+                <label for="elderly" class="large-button">
+                    <input type="checkbox" name="elderly" id="elderly">
+                    <span class="material-symbols-rounded">
+                        elderly
+                    </span>
+                    Senior
+                </label>
+                <label for="accessible" class="large-button">
+                    <input type="checkbox" name="accessible" id="accessible">
+                    <span class="material-symbols-rounded">
+                        accessible
+                    </span>
+                    En situation de handicap
+                </label>
+                <label for="clinical_notes" class="large-button">
+                    <input type="checkbox" name="clinical_notes" id="clinical_notes">
+                    <span class="material-symbols-rounded">
+                        clinical_notes
+                    </span>
+                    Personnel soignant
+                </label>
+                <label for="family_home" class="large-button">
+                    <input type="checkbox" name="family_home" id="family_home">
+                    <span class="material-symbols-rounded">
+                        family_home
+                    </span>
+                    Membre d'une famille
+                </label>
+            </div>
             <div class="form__group">
                 <input type="text" id="firstname" class="form__field" placeholder="">
                 <label for="firstname" class="form__label">Prénom</label>
@@ -49,6 +80,7 @@
             <input type="submit" value="Continuer" class="button">
         </form>
     </div>
+    <script src="/assets/js/signup-only-one-selected.js" type="text/javascript"></script>
 </body>
 
 </html>
