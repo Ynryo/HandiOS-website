@@ -16,7 +16,16 @@
 
 <body>
     <?php
-    include(dirname(__FILE__, 2) . "/assets/src/connection.php");
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $firstname = strip_tags($_POST["firstname"]);
+        $name = strip_tags($_POST["name"]);
+        $birthdate = strip_tags($_POST["birthdate"]);
+        $email = strip_tags($_POST["email"]);
+        $password = strip_tags($_POST["password"]);
+        $usertype = 
+        include(dirname(__FILE__, 2) . "/assets/src/connection.php");
+    }
+
     ?>
     <div class="form-frame">
         <img src="/assets/logo/handios-main.png" alt="Logo" srcset="/assets/logo/handios-main.png">

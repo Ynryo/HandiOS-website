@@ -44,6 +44,7 @@ label,
     transition: 0.2s;
     font-size: 12px;
     color: #9b9b9b;
+    text-align: center;
 }
 
 .form__field:focus~.form__label {
