@@ -1,3 +1,7 @@
+form {
+    width: 100%;
+}
+
 .form__group {
     position: relative;
     padding: 15px 0 0;
@@ -20,6 +24,10 @@
 
 .form__field::placeholder {
     color: transparent;
+}
+
+.form__field::-webkit-calendar-picker-indicator {
+    display: none;
 }
 
 .form__field:placeholder-shown~.form__label {
