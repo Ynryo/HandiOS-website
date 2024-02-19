@@ -16,46 +16,59 @@
 
 <body>
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $firstname = strip_tags($_POST["firstname"]);
-        $name = strip_tags($_POST["name"]);
-        $birthdate = strip_tags($_POST["birthdate"]);
-        $email = strip_tags($_POST["email"]);
-        $password = strip_tags($_POST["password"]);
-        $usertype = 
+
+    $firstname = strip_tags($_POST["firstname"]);
+    $name = strip_tags($_POST["name"]);
+    $birthdate = strip_tags($_POST["birthdate"]);
+    $email = strip_tags($_POST["email"]);
+    $password = strip_tags($_POST["password"]);
+
+    if (isset($_POST['usertype'])) {
+        $usertype = $_POST['usertype'];
         include(dirname(__FILE__, 2) . "/assets/src/connection.php");
+        $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type) VALUES ('$firstname', '$name', '$birthdate', '$email', '$password', '$usertype')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "Enregistrement ajouté avec succès à la base de données.";
+        } else {
+            echo "Erreur : " . $sql . "<br>" . mysqli_error($conn);
+        }
+    } else {
+        echo "Veuillez sélectionner un type d'utilisateur.";
     }
 
+    // Fermer la connexion à la base de données
+    mysqli_close($conn);
     ?>
     <div class="form-frame">
         <img src="/assets/logo/handios-main.png" alt="Logo" srcset="/assets/logo/handios-main.png">
         <h1>Inscription</h1>
         <h2>Saisissez vos informations pour utiliser Handi'OS</h2>
-        <form action="/signin/" method="post">
+        <form action="/signup/" method="post">
             <div class="account-type">
                 <label for="elderly" class="large-button">
-                    <input type="checkbox" name="elderly" id="elderly">
+                    <input type="radio" name="usertype" id="elderly" value="1">
                     <span class="material-symbols-rounded">
                         elderly
                     </span>
                     Senior
                 </label>
                 <label for="accessible" class="large-button">
-                    <input type="checkbox" name="accessible" id="accessible">
+                    <input type="radio" name="usertype" id="accessible" value="2">
                     <span class="material-symbols-rounded">
                         accessible
                     </span>
                     En situation de handicap
                 </label>
                 <label for="clinical_notes" class="large-button">
-                    <input type="checkbox" name="clinical_notes" id="clinical_notes">
+                    <input type="radio" name="usertype" id="clinical_notes" value="3">
                     <span class="material-symbols-rounded">
                         clinical_notes
                     </span>
                     Personnel soignant
                 </label>
                 <label for="family_home" class="large-button">
-                    <input type="checkbox" name="family_home" id="family_home">
+                    <input type="radio" name="usertype" id="family_home" value="4">
                     <span class="material-symbols-rounded">
                         family_home
                     </span>
@@ -63,23 +76,23 @@
                 </label>
             </div>
             <div class="form__group">
-                <input type="text" id="firstname" class="form__field" placeholder="">
+                <input type="text" id="firstname" class="form__field" placeholder="" name="firstname">
                 <label for="firstname" class="form__label">Prénom</label>
             </div>
             <div class="form__group">
-                <input type="text" id="name" class="form__field" placeholder="">
+                <input type="text" id="name" class="form__field" placeholder="" name="name">
                 <label for="name" class="form__label">Nom</label>
             </div>
             <div class="form__group">
-                <input type="date" id="birthdate" class="form__field" placeholder="">
+                <input type="date" id="birthdate" class="form__field" placeholder="" name="birthdate">
                 <label for="birthdate" class="form__label">Date de naissance</label>
             </div>
             <div class="form__group">
-                <input type="password" id="email" class="form__field" placeholder="">
+                <input type="text" id="email" class="form__field" placeholder="" name="email">
                 <label for="email" class="form__label">E-mail</label>
             </div>
             <div class="form__group">
-                <input type="password" id="password" class="form__field" placeholder="">
+                <input type="password" id="password" class="form__field" placeholder="" name="password">
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
             <div class="form__group">
@@ -89,7 +102,7 @@
             <input type="submit" value="Continuer" class="button">
         </form>
     </div>
-    <script src="/assets/js/signup-only-one-selected.js" type="text/javascript"></script>
+    <!-- <script src="/assets/js/signup-only-one-selected.js" type="text/javascript"></script> -->
 </body>
 
 </html>
