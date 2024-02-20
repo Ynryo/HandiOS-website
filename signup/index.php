@@ -43,8 +43,6 @@
                         } else {
                             header("Location: /login/");
                         }
-
-                        mysqli_close($conn);
                     } else {
                         echo "<p class=\"error\">Les mots de passe ne sont pas identiques.</p>";
                     }
@@ -52,6 +50,7 @@
                     echo "<p class=\"error\">Veuillez sélectionner un type de compte</p>";
                 }
             }
+            $conn->close();
         }
         ?>
         <form action="/signup/" method="post">
