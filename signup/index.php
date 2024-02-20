@@ -37,15 +37,15 @@
                     $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type, ip_adress) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype', '$ip_adress')";
 
                     if (!mysqli_query($conn, $sql)) {
-                        echo "<p class=\"error-form\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
+                        echo "<p class=\"error\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
                     }
 
                     mysqli_close($conn);
                 } else {
-                    echo "<p class=\"error-form\">Les mots de passe ne sont pas identiques.</p>";
+                    echo "<p class=\"error\">Les mots de passe ne sont pas identiques.</p>";
                 }
             } else {
-                echo "<p class=\"error-form\">Veuillez sélectionner un type de compte</p>";
+                echo "<p class=\"error\">Veuillez sélectionner un type de compte</p>";
             }
         }
         ?>
