@@ -20,11 +20,11 @@
         <h2>Utilisez les services de Handi'OS</h2>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = strip_tags($_POST["username"]);
+            $username = strip_tags($_POST["email"]);
             $password = strip_tags($_POST["password"]);
-            include(dirname(__FILE__, 2) . '/assets/src/connection.php');
+            include(dirname(__FILE__, 2) . "/assets/src/connection.php");
 
-            $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
+            $stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -34,13 +34,13 @@
                 $row = $result->fetch_assoc();
                 if (password_verify($password, $row["password"])) {
                     // Mot de passe correct, connecter l'utilisateur
-                    $_SESSION["session_id"] = bin2hex(random_bytes(32));
-                    $_SESSION["user_id"] = $row["id"];
+                    // $_SESSION["session_id"] = bin2hex(random_bytes(32));
+                    // $_SESSION["user_id"] = $row["id"];
                     echo "Connected";
                     // header("Location: /");
                 } else {
                     // Mot de passe incorrect
-                    echo "<p class=\"error\">Informations d'identification incorrectes.</p>";
+                    echo "<p class=\"error\">Informations d'identification incorrectes 2.</p>";
                 }
             } else {
                 // Utilisateur non trouvé
@@ -52,16 +52,18 @@
             $conn->close();
         }
         ?>
-        <div class="form__group">
-            <input type="email" id="email" class="form__field" placeholder="">
-            <label for="email" class="form__label">E-mail</label>
-        </div>
-        <div class="form__group">
-            <input type="password" id="password" class="form__field" placeholder="">
-            <label for="password" class="form__label">Mot de passe</label>
-        </div>
-        <a href="/signup/" class="button">Je n'ai pas de compte</a>
-        <a href="/signin/" class="button">Continuer</a>
+        <form action="/login/" method="post">
+            <div class="form__group">
+                <input type="email" id="email" class="form__field" placeholder="" required>
+                <label for="email" class="form__label">E-mail</label>
+            </div>
+            <div class="form__group">
+                <input type="password" id="password" class="form__field" placeholder="" required>
+                <label for="password" class="form__label">Mot de passe</label>
+            </div>
+            <a href="/signup/" class="button">Je n'ai pas de compte</a>
+            <input type="submit" value="Continuer" class="button">
+        </form>
     </div>
 </body>
 
