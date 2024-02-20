@@ -20,24 +20,24 @@
         <h2>Utilisez les services de Handi'OS</h2>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username_input = strip_tags($_POST["username"]);
-            $password_input = strip_tags($_POST["password"]);
-            include(dirname(__FILE__, 1) . '/assets/src/connection.php');
+            $username = strip_tags($_POST["username"]);
+            $password = strip_tags($_POST["password"]);
+            include(dirname(__FILE__, 2) . '/assets/src/connection.php');
 
-            // Requête SQL pour vérifier si l'utilisateur existe
             $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
-            $stmt->bind_param("s", $username_input);
+            $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($result->num_rows == 1) {
                 // Utilisateur trouvé, vérifier le mot de passe
                 $row = $result->fetch_assoc();
-                if (password_verify($password_input, $row["password"])) {
+                if (password_verify($password, $row["password"])) {
                     // Mot de passe correct, connecter l'utilisateur
                     $_SESSION["session_id"] = bin2hex(random_bytes(32));
                     $_SESSION["user_id"] = $row["id"];
-                    header("Location: /home/");
+                    echo "Connected";
+                    // header("Location: /");
                 } else {
                     // Mot de passe incorrect
                     echo "<p class=\"error\">Informations d'identification incorrectes.</p>";
@@ -60,6 +60,7 @@
             <input type="password" id="password" class="form__field" placeholder="">
             <label for="password" class="form__label">Mot de passe</label>
         </div>
+        <a href="/signup/" class="button">Je n'ai pas de compte</a>
         <a href="/signin/" class="button">Continuer</a>
     </div>
 </body>

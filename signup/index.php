@@ -16,29 +16,33 @@
 
 <body>
     <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $firstname = strip_tags($_POST["firstname"]);
+        $name = strip_tags($_POST["name"]);
+        $birthdate = strip_tags($_POST["birthdate"]);
+        $email = strip_tags($_POST["email"]);
+        $password = strip_tags($_POST["password"]);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $confirm_password = strip_tags($_POST["confirm-password"]);
 
-    $firstname = strip_tags($_POST["firstname"]);
-    $name = strip_tags($_POST["name"]);
-    $birthdate = strip_tags($_POST["birthdate"]);
-    $email = strip_tags($_POST["email"]);
-    $password = strip_tags($_POST["password"]);
+        if (isset($_POST['usertype'])) {
+            $usertype = strip_tags($_POST['usertype']);
+            if ($confirm_password == $password) {
+                $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype')";
+                include(dirname(__FILE__, 2) . "/assets/src/connection.php");
 
-    if (isset($_POST['usertype'])) {
-        $usertype = $_POST['usertype'];
-        include(dirname(__FILE__, 2) . "/assets/src/connection.php");
-        $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type) VALUES ('$firstname', '$name', '$birthdate', '$email', '$password', '$usertype')";
+                if (!mysqli_query($conn, $sql)) {
+                    echo "<p class=\"error-form\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
+                }
 
-        if (mysqli_query($conn, $sql)) {
-            echo "Enregistrement ajouté avec succès à la base de données.";
+                mysqli_close($conn);
+            } else {
+                echo "<p class=\"error-form\">Les mots de passe ne sont pas identiques.</p>";
+            }
         } else {
-            echo "Erreur : " . $sql . "<br>" . mysqli_error($conn);
+            echo "<p class=\"error-form\">Veuillez sélectionner un type de compte</p>";
         }
-    } else {
-        echo "Veuillez sélectionner un type d'utilisateur.";
     }
-
-    // Fermer la connexion à la base de données
-    mysqli_close($conn);
     ?>
     <div class="form-frame">
         <img src="/assets/logo/handios-main.png" alt="Logo" srcset="/assets/logo/handios-main.png">
@@ -96,13 +100,14 @@
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
             <div class="form__group">
-                <input type="password" id="confirm-password" class="form__field" placeholder="">
+                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password">
                 <label for="confirm-password" class="form__label">Confirmez le mot de passe</label>
             </div>
+            <!-- <a href="/login/" class="button">J'ai déjà un compte</a> -->
             <input type="submit" value="Continuer" class="button">
         </form>
+
     </div>
-    <!-- <script src="/assets/js/signup-only-one-selected.js" type="text/javascript"></script> -->
 </body>
 
 </html>
