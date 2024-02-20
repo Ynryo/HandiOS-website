@@ -103,8 +103,10 @@
                 <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password">
                 <label for="confirm-password" class="form__label">Confirmez le mot de passe</label>
             </div>
-            <!-- <a href="/login/" class="button">J'ai déjà un compte</a> -->
-            <input type="submit" value="Continuer" class="button">
+            <div class="bottom-buttons-form">
+                <a href="/login/" class="button">J'ai déjà un compte</a>
+                <input type="submit" value="Continuer" class="button">
+            </div>
         </form>
 
     </div>

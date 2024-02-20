@@ -55,3 +55,8 @@ label,
     padding-bottom: 6px;
     border-bottom: 2px solid #000000;
 }
+
+.bottom-buttons-form {
+    display: flex;
+    flex-direction: row;
+}
