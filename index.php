@@ -7,10 +7,7 @@ include(dirname(__FILE__, 1) . "/assets/src/session.php");
 <head>
     <title>Handi'OS</title>
     <meta property="og:site_name" content="Handi'OS">
-    <meta name="theme-color" content="#fff">
-    <link rel="manifest" href="/app.webmanifest">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/assets/favicon/handios-favicon.png">
+    <?php include(dirname(__FILE__, 2) . "/assets/src/header.php") ?>
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/buttons.css">
 </head>
@@ -18,7 +15,6 @@ include(dirname(__FILE__, 1) . "/assets/src/session.php");
 <body>
     <div class="main">
         <p>Le site est actuellement en développement.</p>
-    </div>
-</body>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=gshfnJhNQL7w1viP&amp;autoplay=1;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></body>
 
 </html>

@@ -16,6 +16,12 @@
     background-color: var(--second-blue-theme);
 }
 
+.button.secondary-button {
+    background-color: #fff;
+    border: 1px solid var(--main-blue-theme);
+    color: var(--main-blue-theme);
+}
+
 .account-type {
     display: flex;
     flex-direction: row;

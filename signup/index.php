@@ -2,12 +2,8 @@
 <html lang="fr">
 
 <head>
-    <title>Handi'OS</title>
-    <meta property="og:site_name" content="Handi'OS">
-    <meta name="theme-color" content="#fff">
-    <link rel="manifest" href="/app.webmanifest">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/assets/favicon/handios-favicon.png">
+    <title>Handi'OS - Inscription</title>
+    <?php include(dirname(__FILE__, 2) . "/assets/src/header.php") ?>
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/inputs.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/buttons.css">
@@ -29,23 +25,32 @@
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $confirm_password = strip_tags($_POST["confirm-password"]);
 
-            if (isset($_POST['usertype'])) {
-                $usertype = strip_tags($_POST['usertype']);
-                if ($confirm_password == $password) {
-                    include(dirname(__FILE__, 2) . "/assets/src/connection.php");
-                    $ip_adress = get_client_ip();
-                    $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type, ip_adress) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype', '$ip_adress')";
+            $sql = "SELECT id FROM users WHERE email = '$email'";
+            include(dirname(__FILE__, 2) . "/assets/src/connection.php");
+            $result = $conn->query($sql);
 
-                    if (!mysqli_query($conn, $sql)) {
-                        echo "<p class=\"error\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
-                    }
-
-                    mysqli_close($conn);
-                } else {
-                    echo "<p class=\"error\">Les mots de passe ne sont pas identiques.</p>";
-                }
+            if ($result->num_rows > 0) {
+                echo "<p class=\"error\">Cet email est déjà utilisé.</p>";
             } else {
-                echo "<p class=\"error\">Veuillez sélectionner un type de compte</p>";
+                if (isset($_POST['usertype'])) {
+                    $usertype = strip_tags($_POST['usertype']);
+                    if ($confirm_password == $password) {
+                        $ip_adress = get_client_ip();
+                        $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type, ip_adress) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype', '$ip_adress')";
+
+                        if (!mysqli_query($conn, $sql)) {
+                            echo "<p class=\"error\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
+                        } else {
+                            header("Location: /login/");
+                        }
+
+                        mysqli_close($conn);
+                    } else {
+                        echo "<p class=\"error\">Les mots de passe ne sont pas identiques.</p>";
+                    }
+                } else {
+                    echo "<p class=\"error\">Veuillez sélectionner un type de compte</p>";
+                }
             }
         }
         ?>
@@ -81,31 +86,31 @@
                 </label>
             </div>
             <div class="form__group">
-                <input type="text" id="firstname" class="form__field" placeholder="" name="firstname" required>
+                <input type="text" id="firstname" class="form__field" placeholder="" name="firstname" required autocomplete="give-name">
                 <label for="firstname" class="form__label">Prénom</label>
             </div>
             <div class="form__group">
-                <input type="text" id="name" class="form__field" placeholder="" name="name" required>
+                <input type="text" id="name" class="form__field" placeholder="" name="name" required autocomplete="family-name">
                 <label for="name" class="form__label">Nom</label>
             </div>
             <div class="form__group">
-                <input type="date" id="birthdate" class="form__field" placeholder="" name="birthdate" required>
+                <input type="date" id="birthdate" class="form__field" placeholder="" name="birthdate" required autocomplete="bday">
                 <label for="birthdate" class="form__label">Date de naissance</label>
             </div>
             <div class="form__group">
-                <input type="text" id="email" class="form__field" placeholder="" name="email" required>
+                <input type="text" id="email" class="form__field" placeholder="" name="email" required autocomplete="email">
                 <label for="email" class="form__label">E-mail</label>
             </div>
             <div class="form__group">
-                <input type="password" id="password" class="form__field" placeholder="" name="password" required>
+                <input type="password" id="password" class="form__field" placeholder="" name="password" required autocomplete="new-password">
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
             <div class="form__group">
-                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password" required>
+                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password" required autocomplete="new-password">
                 <label for="confirm-password" class="form__label">Confirmez le mot de passe</label>
             </div>
             <div class="bottom-buttons-form">
-                <a href="/login/" class="button">J'ai déjà un compte</a>
+                <a href="/login/" class="button secondary-button">J'ai déjà un compte</a>
                 <input type="submit" value="S'inscrire" class="button">
             </div>
         </form>
