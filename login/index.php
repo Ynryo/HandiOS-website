@@ -33,7 +33,6 @@
                 // Utilisateur trouvé, vérifier le mot de passe
                 $row = $result->fetch_assoc();
                 if (password_verify($password, $row["password"])) {
-                    // Mot de passe correct, connecter l'utilisateur
                     // $_SESSION["session_id"] = bin2hex(random_bytes(32));
                     // $_SESSION["user_id"] = $row["id"];
                     echo "Connected";
@@ -61,8 +60,10 @@
                 <input type="password" id="password" class="form__field" placeholder="" required>
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
-            <a href="/signup/" class="button">Je n'ai pas de compte</a>
-            <input type="submit" value="Continuer" class="button">
+            <div class="bottom-buttons-form">
+                <a href="/signup/" class="button">Je n'ai pas de compte</a>
+                <input type="submit" value="Se connecter" class="button">
+            </div>
         </form>
     </div>
 </body>

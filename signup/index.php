@@ -15,64 +15,65 @@
 </head>
 
 <body>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $firstname = strip_tags($_POST["firstname"]);
-        $name = strip_tags($_POST["name"]);
-        $birthdate = strip_tags($_POST["birthdate"]);
-        $email = strip_tags($_POST["email"]);
-        $password = strip_tags($_POST["password"]);
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $confirm_password = strip_tags($_POST["confirm-password"]);
-
-        if (isset($_POST['usertype'])) {
-            $usertype = strip_tags($_POST['usertype']);
-            if ($confirm_password == $password) {
-                $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype')";
-                include(dirname(__FILE__, 2) . "/assets/src/connection.php");
-
-                if (!mysqli_query($conn, $sql)) {
-                    echo "<p class=\"error-form\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
-                }
-
-                mysqli_close($conn);
-            } else {
-                echo "<p class=\"error-form\">Les mots de passe ne sont pas identiques.</p>";
-            }
-        } else {
-            echo "<p class=\"error-form\">Veuillez sélectionner un type de compte</p>";
-        }
-    }
-    ?>
     <div class="form-frame">
         <img src="/assets/logo/handios-main.png" alt="Logo" srcset="/assets/logo/handios-main.png">
         <h1>Inscription</h1>
         <h2>Saisissez vos informations pour utiliser Handi'OS</h2>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $firstname = strip_tags($_POST["firstname"]);
+            $name = strip_tags($_POST["name"]);
+            $birthdate = strip_tags($_POST["birthdate"]);
+            $email = strip_tags($_POST["email"]);
+            $password = strip_tags($_POST["password"]);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $confirm_password = strip_tags($_POST["confirm-password"]);
+
+            if (isset($_POST['usertype'])) {
+                $usertype = strip_tags($_POST['usertype']);
+                if ($confirm_password == $password) {
+                    include(dirname(__FILE__, 2) . "/assets/src/connection.php");
+                    $ip_adress = get_client_ip();
+                    $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type, ip_adress) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype', '$ip_adress')";
+
+                    if (!mysqli_query($conn, $sql)) {
+                        echo "<p class=\"error-form\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
+                    }
+
+                    mysqli_close($conn);
+                } else {
+                    echo "<p class=\"error-form\">Les mots de passe ne sont pas identiques.</p>";
+                }
+            } else {
+                echo "<p class=\"error-form\">Veuillez sélectionner un type de compte</p>";
+            }
+        }
+        ?>
         <form action="/signup/" method="post">
             <div class="account-type">
                 <label for="elderly" class="large-button">
-                    <input type="radio" name="usertype" id="elderly" value="1">
+                    <input type="radio" name="usertype" id="elderly" value="1" required>
                     <span class="material-symbols-rounded">
                         elderly
                     </span>
                     Senior
                 </label>
                 <label for="accessible" class="large-button">
-                    <input type="radio" name="usertype" id="accessible" value="2">
+                    <input type="radio" name="usertype" id="accessible" value="2" required>
                     <span class="material-symbols-rounded">
                         accessible
                     </span>
                     En situation de handicap
                 </label>
                 <label for="clinical_notes" class="large-button">
-                    <input type="radio" name="usertype" id="clinical_notes" value="3">
+                    <input type="radio" name="usertype" id="clinical_notes" value="3" required>
                     <span class="material-symbols-rounded">
                         clinical_notes
                     </span>
                     Personnel soignant
                 </label>
                 <label for="family_home" class="large-button">
-                    <input type="radio" name="usertype" id="family_home" value="4">
+                    <input type="radio" name="usertype" id="family_home" value="4" required>
                     <span class="material-symbols-rounded">
                         family_home
                     </span>
@@ -80,32 +81,32 @@
                 </label>
             </div>
             <div class="form__group">
-                <input type="text" id="firstname" class="form__field" placeholder="" name="firstname">
+                <input type="text" id="firstname" class="form__field" placeholder="" name="firstname" required>
                 <label for="firstname" class="form__label">Prénom</label>
             </div>
             <div class="form__group">
-                <input type="text" id="name" class="form__field" placeholder="" name="name">
+                <input type="text" id="name" class="form__field" placeholder="" name="name" required>
                 <label for="name" class="form__label">Nom</label>
             </div>
             <div class="form__group">
-                <input type="date" id="birthdate" class="form__field" placeholder="" name="birthdate">
+                <input type="date" id="birthdate" class="form__field" placeholder="" name="birthdate" required>
                 <label for="birthdate" class="form__label">Date de naissance</label>
             </div>
             <div class="form__group">
-                <input type="text" id="email" class="form__field" placeholder="" name="email">
+                <input type="text" id="email" class="form__field" placeholder="" name="email" required>
                 <label for="email" class="form__label">E-mail</label>
             </div>
             <div class="form__group">
-                <input type="password" id="password" class="form__field" placeholder="" name="password">
+                <input type="password" id="password" class="form__field" placeholder="" name="password" required>
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
             <div class="form__group">
-                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password">
+                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password" required>
                 <label for="confirm-password" class="form__label">Confirmez le mot de passe</label>
             </div>
             <div class="bottom-buttons-form">
                 <a href="/login/" class="button">J'ai déjà un compte</a>
-                <input type="submit" value="Continuer" class="button">
+                <input type="submit" value="S'inscrire" class="button">
             </div>
         </form>
 

@@ -60,3 +60,23 @@ label,
     display: flex;
     flex-direction: row;
 }
+
+.bottom-buttons-form>:first-child {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.bottom-buttons-form>:last-child {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+@media all and (max-width: 500px) {
+    .bottom-buttons-form {
+        flex-direction: column;
+    }
+
+    .bottom-buttons-form>* {
+        margin: 20px 0 0 0 !important;
+    }
+}
