@@ -56,7 +56,7 @@
         <form action="/signup/" method="post">
             <div class="account-type">
                 <label for="elderly" class="large-button">
-                    <input type="radio" name="usertype" id="elderly" value="1" required>
+                    <!-- <input type="radio" name="usertype" id="elderly" value="1" required> -->
                     <span class="material-symbols-rounded">
                         elderly
                     </span>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include(dirname(__FILE__, 1) . "/assets/src/session.php");
 ?>
 <!DOCTYPE html>
@@ -15,6 +15,9 @@ include(dirname(__FILE__, 1) . "/assets/src/session.php");
 <body>
     <div class="main">
         <p>Le site est actuellement en développement.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=gshfnJhNQL7w1viP&amp;autoplay=1;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></body>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=gshfnJhNQL7w1viP&amp;autoplay=1;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <a class="button" href="/assets/src/logout.php">Déconnexion</a>
+    </div>
+</body>
 
 </html>
