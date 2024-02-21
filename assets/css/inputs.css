@@ -73,7 +73,7 @@ label,
 
 @media all and (max-width: 500px) {
     .bottom-buttons-form {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .bottom-buttons-form>* {
