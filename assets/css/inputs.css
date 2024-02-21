@@ -30,7 +30,7 @@ form {
     display: none;
 }
 
-.form__field:,~.form__label {
+.form__field:placeholder-shown~.form__label {
     font-size: 16px;
     cursor: text;
     top: 20px;

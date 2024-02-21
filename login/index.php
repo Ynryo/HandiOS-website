@@ -47,7 +47,7 @@
                 }
             } else {
                 // Utilisateur non trouvé
-                $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES (NULL,NULL,'$ip_adress','$date','$time',true)";
+                $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES (NULL,NULL,'$ip_adress','$date','$time',false)";
                 $conn->query($sql);
                 echo "<p class=\"error\">Informations d'identification incorrectes.</p>";
             }
