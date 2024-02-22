@@ -32,7 +32,7 @@
             if ($result->num_rows > 0) {
                 echo "<p class=\"error\">Cet email est déjà utilisé.</p>";
             } else {
-                if (isset($_POST['usertype'])) {
+                if (isset($_POST["usertype"])) {
                     $usertype = strip_tags($_POST['usertype']);
                     if ($confirm_password == $password) {
                         $ip_adress = get_client_ip();
