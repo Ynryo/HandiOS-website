@@ -39,16 +39,14 @@
                     $_SESSION["user_type"] = $row["user_type"];
                     $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES ('$email','$user_id','$ip_adress','$date','$time',true)";
                     $conn->query($sql);
-                    if ($user_type == 1) {
-                        echo "<p class=\"warning\">Vous ne pouvez pas utiliser ce type de compte. Vous pouvez uniquement l'utiliser sur la tablette connectée Handi'OS.</p>";
-                    } else if ($user_type == 2) {
-                        echo "<p class=\"warning\">Vous ne pouvez pas utiliser ce type de compte. Vous pouvez uniquement l'utiliser sur la tablette connectée Handi'OS.</p>";
-                    } else if ($user_type == 3) {
+                    if ($user_type == 3) {
                         echo "<p class=\"success\">Connected</p>";
-                        header("Location: https://handios-app.specstech.fr/nurse/", true);
+                        header("Location: /nurse/", true);
                     } else if ($user_type == 4) {
                         echo "<p class=\"success\">Connected</p>";
-                        header("Location: https://handios-app.specstech.fr/family/", true);
+                        header("Location: /family/", true);
+                    } else {
+                        echo "<p class=\"warning\">Vous ne pouvez pas utiliser ce type de compte.<br>Vous pouvez uniquement l'utiliser sur la tablette connectée Handi'OS.</p>";
                     }
                 } else {
                     // Mot de passe incorrect
