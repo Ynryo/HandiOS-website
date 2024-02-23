@@ -20,7 +20,7 @@
             $password_input = strip_tags($_POST["password"]);
             include(dirname(__FILE__, 2) . "/assets/src/connection.php");
 
-            $sql = "SELECT id, email, password, usertype FROM users WHERE email = '$email_input'";
+            $sql = "SELECT id, email, password, user_type FROM users WHERE email = '$email_input'";
             $result = $conn->query($sql);
             $ip_adress = get_client_ip();
             $date = date("Y-m-d");
@@ -31,17 +31,25 @@
                 $row = $result->fetch_assoc();
                 $email = $row["email"];
                 $user_id = $row["id"];
+                $user_type = $row["user_type"];
                 if (password_verify($password_input, $row["password"])) {
                     session_start(['cookie_lifetime' => 86400]);
                     $_SESSION["session_id"] = bin2hex(random_bytes(32));
                     $_SESSION["user_id"] = $row["id"];
+                    $_SESSION["user_type"] = $row["user_type"];
                     $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES ('$email','$user_id','$ip_adress','$date','$time',true)";
                     $conn->query($sql);
-                    echo "<p class=\"success\">Connected</p>";
-                    if ($) {
-
+                    if ($user_type == 1) {
+                        echo "<p class=\"warning\">Vous ne pouvez pas utiliser ce type de compte. Vous pouvez uniquement l'utiliser sur la tablette connectée Handi'OS.</p>";
+                    } else if ($user_type == 2) {
+                        echo "<p class=\"warning\">Vous ne pouvez pas utiliser ce type de compte. Vous pouvez uniquement l'utiliser sur la tablette connectée Handi'OS.</p>";
+                    } else if ($user_type == 3) {
+                        echo "<p class=\"success\">Connected</p>";
+                        header("Location: https://handios-app.specstech.fr/nurse/", true);
+                    } else if ($user_type == 4) {
+                        echo "<p class=\"success\">Connected</p>";
+                        header("Location: https://handios-app.specstech.fr/family/", true);
                     }
-                    header("Location: /");
                 } else {
                     // Mot de passe incorrect
                     $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES ('$email','$user_id','$ip_adress','$date','$time',false)";
