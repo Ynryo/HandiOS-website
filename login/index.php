@@ -20,7 +20,7 @@
             $password_input = strip_tags($_POST["password"]);
             include(dirname(__FILE__, 2) . "/assets/src/connection.php");
 
-            $sql = "SELECT id, email, password FROM users WHERE email = '$email_input'";
+            $sql = "SELECT id, email, password, usertype FROM users WHERE email = '$email_input'";
             $result = $conn->query($sql);
             $ip_adress = get_client_ip();
             $date = date("Y-m-d");
@@ -38,6 +38,9 @@
                     $sql = "INSERT INTO `connections_logs`(`email`, `user_id`, `ip_adress`, `date`, `time`, `success`) VALUES ('$email','$user_id','$ip_adress','$date','$time',true)";
                     $conn->query($sql);
                     echo "<p class=\"success\">Connected</p>";
+                    if ($) {
+
+                    }
                     header("Location: /");
                 } else {
                     // Mot de passe incorrect
