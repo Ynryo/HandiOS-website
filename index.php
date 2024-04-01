@@ -20,8 +20,8 @@
                     <!-- <li><a href="/" class="button secondary-button">Accueil</a></li>
                     <li><a href="/" class="button secondary-button">À propos</a></li>
                     <li><a href="/" class="button">Télécharger</a></li> -->
-                    <li><a href="/signup/" class="button secondary-button">Créer un compte</a></li>
-                    <li><a href="/login/" class="button">Se connecter</a></li>
+                    <li><a href="https://handios-app.specstech.fr/signup/" class="button secondary-button">Créer un compte</a></li>
+                    <li><a href="https://handios-app.specstech.fr/login/" class="button">Se connecter</a></li>
                 </ul>
             </nav>
         </header>
