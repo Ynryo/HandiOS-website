@@ -1,0 +1,351 @@
+header,
+footer {
+    width: 100%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+h1 {
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+header img {
+    max-width: 250px;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li a {
+    text-decoration: none;
+}
+
+header nav ul li:not(:last-child) a {
+    margin-right: 10px;
+}
+
+header .favicon {
+    display: none;
+    height: 61px;
+}
+
+@media all and (max-width: 600px) {
+    header .logo {
+        display: none;
+    }
+
+    header .favicon {
+        display: block;
+    }
+
+    header nav ul li a.button {
+        font-size: 13px;
+        padding: 15px;
+    }
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.top {
+    background-color: #fff;
+    color: #000;
+}
+
+.top img {
+    width: 100px;
+    margin: 50px;
+}
+
+.top h1 {
+    font-size: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+@media all and (max-width: 1000px) {
+    .top h1 {
+        font-size: 64px !important;
+    }
+}
+
+.top #help_people_anim {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 148px;
+    padding: 30px;
+    border-radius: 100px;
+    font-size: 72px;
+    background-color: rgba(24, 128, 56, 0.25);
+    color: rgb(24 128 56);
+    animation: help_peoples_anim_colors 15s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+    overflow: hidden;
+}
+
+#help_people_anim::after {
+    position: relative;
+    content: "";
+    height: 88px;
+    font-size: 72px;
+    animation: help_peoples_anim_text 15s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+}
+
+@media all and (max-width: 1000px) {
+
+    #help_people_anim::after,
+    #help_people_anim {
+        font-size: 56px;
+    }
+}
+
+@keyframes help_peoples_anim_text {
+    0% {
+        content: "aux seniors";
+    }
+
+    0%,
+    25%,
+    50%,
+    75%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    7.5%,
+    32.5%,
+    57.5%,
+    82.5% {
+        transform: translateY(150px);
+    }
+
+    7.51%,
+    32.51%,
+    57.51%,
+    82.51% {
+        display: none;
+    }
+
+    7.52%,
+    32.52%,
+    57.52%,
+    82.52% {
+        transform: translateY(-150px);
+    }
+
+    7.53%,
+    32.53%,
+    57.53%,
+    82.53% {
+        display: block;
+    }
+
+    17.5% {
+        content: "aux personnes handicapées";
+    }
+
+    42.5% {
+        content: "aux infirmiers";
+    }
+
+    67.5% {
+        content: "aux familles";
+    }
+
+    92.5%,
+    100% {
+        content: "aux seniors";
+    }
+}
+
+@keyframes help_peoples_anim_colors {
+
+    100%,
+    0% {
+        background-color: rgba(24, 128, 56, 0.25);
+        color: rgb(24 128 56);
+        /* width: 561px; */
+    }
+
+    7.5% {
+        /* width: 561px; */
+    }
+
+    17.5% {
+        /* width: 1200px; */
+    }
+
+    25% {
+        background-color: rgba(0, 120, 255, 0.25);
+        color: rgb(0, 120, 255);
+    }
+
+    32.5% {
+        /* width: 1200px; */
+    }
+
+    42.5% {
+        /* width: 655px; */
+    }
+
+    50% {
+        background-color: rgba(190, 0, 0, 0.25);
+        color: rgb(190, 0, 0);
+    }
+
+    57.5% {
+        /* width: 655px; */
+    }
+
+    67.5% {
+        /* width: 541px; */
+    }
+
+    75% {
+        background-color: rgba(216, 0, 180, 0.25);
+        color: rgb(216, 0, 180);
+    }
+
+    82.5% {
+        /* width: 541px; */
+    }
+
+    92.5% {
+        /* width: 561px; */
+    }
+}
+
+.top #help_people_anim div {
+    display: flex;
+    flex-direction: column;
+}
+
+.top .material-symbols-rounded.anim_icon {
+    display: flex;
+    font-size: 72px;
+    margin: 100px 0;
+    padding: 0;
+    height: 88px;
+    line-height: 1.2;
+    transform: translateY(calc(144px + 1*288px));
+    animation: icon_help_peoples_anim 15s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+}
+
+@keyframes icon_help_peoples_anim {
+    0% {
+        transform: translateY(calc(1.5*288px));
+        /*senior*/
+    }
+
+    25% {
+        transform: translateY(144px);
+        /*handi*/
+    }
+
+    50% {
+        transform: translateY(calc((-0.5)*288px));
+        /*infirm*/
+    }
+
+    75% {
+        transform: translateY(calc((-1.5)*288px));
+        /*family*/
+    }
+
+    82.5% {
+        transform: translateY(calc((-2.5)*288px));
+    }
+
+    82.501% {
+        transform: translateY(calc(2.5*288px));
+    }
+
+    100% {
+        transform: translateY(calc(1.5*288px));
+        /*senior*/
+    }
+}
+
+.top .button {
+    max-width: 350px;
+    font-weight: 500;
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+
+.main section:nth-of-type(even) {
+    background-color: #2f7cd3;
+    color: #fff;
+}
+
+.main section:nth-of-type(odd) {
+    background-color: #fff;
+    color: #2f7cd3;
+}
+
+.main section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 32px;
+}
+
+.main section div.content {
+    min-height: 300px;
+}
+
+section div.content div {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px;
+}
+
+section:nth-of-type(even) div.content div {
+    flex-direction: row;
+}
+
+section:nth-of-type(odd) div.content div {
+    flex-direction: row-reverse;
+}
+
+@media all and (max-width: 960px) {
+    section div.content div {
+        flex-direction: column !important;
+        align-items: center;
+    }
+
+    section div.content div {
+        margin: 10px;
+    }
+}
+
+section div.content div div.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section div.content div img {
+    max-width: 50%;
+}
+
+footer {
+    justify-content: center;
+}

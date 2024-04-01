@@ -23,21 +23,20 @@
             $email = strip_tags($_POST["email"]);
             $password = strip_tags($_POST["password"]);
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $confirm_password = strip_tags($_POST["confirm-password"]);
-
+            $confirm_password = strip_tags($_POST["confirm_password"]);
             $sql = "SELECT id FROM users WHERE email = '$email'";
             include(dirname(__FILE__, 2) . "/assets/src/connection.php");
             $result = $conn->query($sql);
-
             if ($result->num_rows > 0) {
                 echo "<p class=\"error\">Cet email est déjà utilisé.</p>";
             } else {
                 if (isset($_POST["usertype"])) {
                     $usertype = strip_tags($_POST['usertype']);
-                    if ($confirm_password == $password) {
+                    echo $password . " - " . $hashed_password . " - " . $confirm_password;
+
+                    if ($confirm_password == strip_tags($_POST["password"])) {
                         $ip_adress = get_client_ip();
                         $sql = "INSERT INTO users (firstname, name, birthdate, email, password, user_type, ip_adress) VALUES ('$firstname', '$name', '$birthdate', '$email', '$hashed_password', '$usertype', '$ip_adress')";
-
                         if (!mysqli_query($conn, $sql)) {
                             echo "<p class=\"error\">Erreur : " . $sql . "<br>" . mysqli_error($conn) . "</p>";
                         } else {
@@ -105,15 +104,14 @@
                 <label for="password" class="form__label">Mot de passe</label>
             </div>
             <div class="form__group">
-                <input type="password" id="confirm-password" class="form__field" placeholder="" name="confirm-password" required autocomplete="new-password">
-                <label for="confirm-password" class="form__label">Confirmez le mot de passe</label>
+                <input type="password" id="confirm_password" class="form__field" placeholder="" name="confirm_password" required autocomplete="new-password">
+                <label for="confirm_password" class="form__label">Confirmez le mot de passe</label>
             </div>
             <div class="bottom-buttons-form">
                 <a href="/login/" class="button secondary-button">J'ai déjà un compte</a>
                 <input type="submit" value="S'inscrire" class="button">
             </div>
         </form>
-
     </div>
 </body>
 

@@ -1,0 +1,25 @@
+{
+    "short_name": "Handi'OS",
+    "name": "Handi'OS",
+    "icons": [
+        {
+            "src": "/assets/favicon/handios-favicon.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/assets/favicon/handios-favicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "lang": "fr",
+    "theme_color": "#fff",
+    "background_color": "#fff",
+    "display": "standalone",
+    "scope": "/",
+    "description": "Consultez, gérez et suivez le quotidien du logement connecté."
+}
