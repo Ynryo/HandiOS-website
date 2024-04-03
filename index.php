@@ -17,9 +17,6 @@
             <img class="favicon" src="/assets/favicon/handios-favicon.png" alt="Mini logo Handi'OS">
             <nav>
                 <ul>
-                    <!-- <li><a href="/" class="button secondary-button">Accueil</a></li>
-                    <li><a href="/" class="button secondary-button">À propos</a></li>
-                    <li><a href="/" class="button">Télécharger</a></li> -->
                     <li><a href="https://handios-app.specstech.fr/signup/" class="button secondary-button">Créer un compte</a></li>
                     <li><a href="https://handios-app.specstech.fr/login/" class="button">Se connecter</a></li>
                 </ul>
